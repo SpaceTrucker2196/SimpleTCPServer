@@ -1,16 +1,10 @@
 from twisted.internet.protocol import Protocol, Factory
 from twisted.internet import task
 from twisted.internet import reactor
-
 import time
 import datetime
 
-def sendDataToClients():
-	for client in factory.clients:
-		msg = "I saw a cat at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-		client.message(msg)
-		print "Sending Data To: ", client
-				
+#socket server protocol		
 class SocketServer(Protocol):
 
 	def message(self, message):
@@ -50,7 +44,14 @@ class SocketServer(Protocol):
 			if command == "end":
 				dataTask.stop
 
-#main					
+#internal methods	
+def sendDataToClients():
+	for client in factory.clients:
+		msg = "I saw a cat at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+		client.message(msg)
+		print "Sending Data To: ", client
+		
+#main				
 factory = Factory()
 factory.protocol = SocketServer
 factory.clients = []
