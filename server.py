@@ -27,7 +27,7 @@ class SocketServer(Protocol):
 			content = a[1]
 			msg = ""
 			
-			if command == "helo":
+			if command == "connect":
 				self.name = content
 				msg = "hello" + self.name
 				for c in self.factory.clients:
